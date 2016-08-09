@@ -2,6 +2,15 @@
 Thumbs.db
 ehthumbs.db
 
+# React bin folders
+android/
+ios/
+node_modules/
+
+# WebStorm files
+
+.idea/
+
 # Folder config file
 Desktop.ini
 
