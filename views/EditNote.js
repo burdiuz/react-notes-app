@@ -14,6 +14,8 @@ const EditNote = () => (
     </View>
 )
 
-EditNote.route = Route.create('Edit Note', 0, EditNote);
+export const route = Route.create('Edit Note', 0, EditNote);
+
+EditNote.route = route;
 
 export default EditNote

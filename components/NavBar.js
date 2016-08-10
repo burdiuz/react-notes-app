@@ -1,73 +1,106 @@
 /**
  * Created by Oleg Galaburda on 02.08.16.
- * @providesModule NavBar
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     StyleSheet,
     Navigator,
     Text,
     View,
-    ScrollView,
-    TouchableHighlight
+    TouchableOpacity
 } from 'react-native';
 
 export const BAR_HEIGHT = 60;
 
-export const NavButtonContainer = ({
+export const NavButtonView = ({
+    onPress,
     children
 }) => (
-    <TouchableHighlight>
+    <TouchableOpacity onPress={onPress} >
       <View style={styles.subContainer} >
         {children}
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
 );
+NavButtonView.propTypes = {
+  children: PropTypes.any.isRequired
+};
 
 export const NavButton = ({
+    onPress,
     children
 }) => {
   let result = null;
   if (children) {
     result = (
-        <NavButtonContainer>
+        <NavButtonView onPress={onPress} >
           <Text style={styles.buttonText} >
             {children}
           </Text>
-        </NavButtonContainer>
+        </NavButtonView>
     );
   }
   return result;
 }
+NavButton.propTypes = {
+  children: PropTypes.any.isRequired
+};
 
-export const LeftButton = (route, navigator, index, navState) => {
+export const LeftButton = ({
+    onPrev,
+    navigator,
+    index
+}) => {
+  console.log('LeftButton Comp', index)
   const list = navigator.getCurrentRoutes();
   return ( index
           ? (
-          <NavButton>
+          <NavButton onPress={() => onPrev(navigator)} >
             &lt; { list[list.length - 1].title }
           </NavButton>
       ) : null
   );
 };
-
-export const RightButton = (route, navigator, index, navState) => {
-  const list = navigator.getCurrentRoutes();
-  return ( index < list.length - 1 ?
-          (
-              <NavButton>
-                {list[index + 1].title}  &gt;
-              </NavButton>
-          ) :
-          (
-              <NavButton>
-                Create New &gt;
-              </NavButton>
-          )
-  );
+LeftButton.propTypes = {
+  onPrev: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
-export const Title = (route, navigator, index, navState) => {
+export const RightButton = ({
+    onNext,
+    onNew,
+    navigator,
+    index
+}) => {
+  const list = navigator.getCurrentRoutes();
+  let result = null;
+  console.log('RightButton Comp', index, list.length)
+  if (index < list.length - 1) {
+    result = (
+        <NavButton onPress={() => onNext(navigator)} >
+          {list[index + 1].title}  &gt;
+        </NavButton>
+    );
+  } else if (index === 0) {
+    result = (
+        <NavButton onPress={() => onNew(navigator)} >
+          Create New &gt;
+        </NavButton>
+    )
+  }
+  return result;
+};
+RightButton.propTypes = {
+  onNext: PropTypes.func.isRequired,
+  onNew: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
+};
+
+export const Title = ({
+    route
+}) => {
   return (
       <View style={styles.subContainer} >
         <Text style={styles.titleText} >
@@ -76,20 +109,22 @@ export const Title = (route, navigator, index, navState) => {
       </View>
   );
 };
-
-const RouteMapper = {
-  LeftButton: LeftButton,
-  RightButton: RightButton,
-  Title: Title
+Title.propTypes = {
+  route: PropTypes.shape({
+    title: PropTypes.string.isRequired
+  }).isRequired
 };
 
-export const NavBar = (props) => {
+/* Stateless Component will not work because of
+ https://github.com/facebook/react-native/issues/2560
+*/
+
+export const navBarFactory = (props = {}) => {
   let { style, ...rest } = props;
   return (
       <Navigator.NavigationBar
           {...rest}
           style={[styles.navBar, style]}
-          routeMapper={RouteMapper}
       />
   )
 }
@@ -120,5 +155,3 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-
-export default NavBar

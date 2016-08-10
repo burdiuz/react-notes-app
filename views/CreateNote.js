@@ -14,6 +14,8 @@ const CreateNote = () => (
     </View>
 )
 
-CreateNote.route = Route.create('Create Note', 1, CreateNote);
+export const route = Route.create('Create Note', 1, CreateNote);
+
+CreateNote.route = route;
 
 export default CreateNote

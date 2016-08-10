@@ -12,7 +12,7 @@ import { RouteList, Route } from 'RouteList'
 import CreateNote from 'CreateNote'
 import EditNote from 'EditNote'
 import MainMenu from 'MainMenu'
-import NavBar from 'NavBar'
+import { navBarFactory } from 'NavBarContainer'
 import HelloWorld from 'HelloWorld'
 
 const ROUTES = new RouteList(
@@ -22,11 +22,6 @@ const ROUTES = new RouteList(
 );
 
 class ReactNotesApp extends Component {
-
-  constructor() {
-    super();
-    let { width, height } = Dimensions.get('window')
-  }
 
   onLayout = (event) => {
     const { width, height } = event.nativeEvent.layout;
@@ -48,7 +43,7 @@ class ReactNotesApp extends Component {
         <Navigator
             initialRoute={ROUTES[0]}
             renderScene={this.navigate}
-            navigationBar={<NavBar/>}
+            navigationBar={navBarFactory()}
             onLayout={this.onLayout}
             style={styles.app}
 
@@ -58,8 +53,7 @@ class ReactNotesApp extends Component {
 }
 
 const styles = StyleSheet.create({
-  app: {
-  },
+  app: {},
   container: {
     flex: 1,
     paddingTop: 60
