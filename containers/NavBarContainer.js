@@ -4,8 +4,8 @@
  */
 
 import React, { Component } from 'react';
-import {
-    navBarFactory as baseFactory,
+import NavBar, {
+    NavBarBase,
     RightButton,
     LeftButton,
     Title
@@ -59,10 +59,17 @@ class RouteMapper {
 
 const DEFAULT_ROUTE_MAPPER = new RouteMapper();
 
-export const navBarFactory = (props = {}) => {
-  props = {
-    routeMapper: DEFAULT_ROUTE_MAPPER,
-    ...props
+export class NavBarContainer extends NavBarBase {
+
+  render() {
+    return (
+        <NavBar
+            {...this.props}
+            routeMapper={DEFAULT_ROUTE_MAPPER}
+            ref={this.onRefNavBar}
+        />
+    )
   }
-  return baseFactory(props);
 }
+
+export default NavBarContainer

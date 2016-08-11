@@ -117,16 +117,40 @@ Title.propTypes = {
 
 /* Stateless Component will not work because of
  https://github.com/facebook/react-native/issues/2560
-*/
+ */
 
-export const navBarFactory = (props = {}) => {
-  let { style, ...rest } = props;
-  return (
-      <Navigator.NavigationBar
-          {...rest}
-          style={[styles.navBar, style]}
-      />
-  )
+export class NavBarBase extends Component {
+
+  _navigationBar = null;
+
+  onRefNavBar = (bar) => {
+    this._navigationBar = bar;
+  }
+
+  updateProgress(...rest) {
+    console.log('updateProgress', rest, this._navigationBar);
+    if (this._navigationBar) {
+      this._navigationBar.updateProgress.apply(this._navigationBar, rest);
+    }
+  }
+}
+
+export class NavBar extends NavBarBase {
+
+  static propTypes = {
+    routeMapper: PropTypes.object.isRequired
+  }
+
+  render() {
+    let { style, ...rest } = this.props;
+    return (
+        <Navigator.NavigationBar
+            {...rest}
+            style={[styles.navBar, style]}
+            ref={this.onRefNavBar}
+        />
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -155,3 +179,5 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
+
+export default NavBar

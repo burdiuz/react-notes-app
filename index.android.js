@@ -12,7 +12,7 @@ import { RouteList, Route } from 'RouteList'
 import CreateNote from 'CreateNote'
 import EditNote from 'EditNote'
 import MainMenu from 'MainMenu'
-import { navBarFactory } from 'NavBarContainer'
+import NavBarContainer from 'NavBarContainer'
 import HelloWorld from 'HelloWorld'
 
 const ROUTES = new RouteList(
@@ -38,12 +38,18 @@ class ReactNotesApp extends Component {
     );
   }
 
+  createNavBar() {
+    return (
+        <NavBarContainer/>
+    )
+  }
+
   render() {
     return (
         <Navigator
             initialRoute={ROUTES[0]}
             renderScene={this.navigate}
-            navigationBar={navBarFactory()}
+            navigationBar={this.createNavBar()}
             onLayout={this.onLayout}
             style={styles.app}
 
