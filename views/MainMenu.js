@@ -4,6 +4,7 @@
  */
 import React, { Component } from 'react';
 import { Route } from 'RouteList';
+import notes from 'Notes';
 import {
     StyleSheet,
     Text,

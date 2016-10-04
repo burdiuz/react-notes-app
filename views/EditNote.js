@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import { Route } from 'RouteList';
+import notes from 'Notes';
 import { StyleSheet, Text, View } from 'react-native';
 
 const EditNote = () => (

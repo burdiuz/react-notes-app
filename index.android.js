@@ -13,7 +13,6 @@ import CreateNote from 'CreateNote'
 import EditNote from 'EditNote'
 import MainMenu from 'MainMenu'
 import NavBarContainer from 'NavBarContainer'
-import HelloWorld from 'HelloWorld'
 
 const ROUTES = new RouteList(
     MainMenu.route,
@@ -31,11 +30,7 @@ class ReactNotesApp extends Component {
   }
 
   navigate = (route, navigator) => {
-    return (
-        <View style={styles.container} >
-          {route.render()}
-        </View>
-    );
+    return route.render();
   }
 
   createNavBar() {
@@ -59,11 +54,7 @@ class ReactNotesApp extends Component {
 }
 
 const styles = StyleSheet.create({
-  app: {},
-  container: {
-    flex: 1,
-    paddingTop: 60
-  }
+  app: {}
 })
 
 AppRegistry.registerComponent('ReactNotesApp', () => ReactNotesApp);
