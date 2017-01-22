@@ -22,4 +22,6 @@ const Input = (props) => {
   );
 };
 
+Input.propTypes = TextInput.propTypes;
+
 export default Input;

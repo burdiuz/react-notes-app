@@ -7,9 +7,10 @@ import { AsyncStorage } from 'react-native';
 export class DataStorage {
   static BASE_KEY = '@NotesApp::';
 
-  async read(key: string) {
-    let string = await AsyncStorage.getItem(DataStorage.getKey(key));
-    return string && JSON.parse(string);
+  read(key: string) {
+    return AsyncStorage.getItem(DataStorage.getKey(key)).then((string) => {
+      return string && JSON.parse(string);
+    });
   }
 
   write(key: string, data) {

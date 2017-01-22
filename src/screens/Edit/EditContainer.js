@@ -2,9 +2,11 @@ import { connect } from 'react-redux';
 import { update, cancel } from 'src/actions/note';
 import Edit from './Edit';
 
+//FIXME not exported as main component src/screens/Edit
+
 const mapStateToProps = (state) => {
   return {
-    note: state.current,
+    note: state.note,
   };
 };
 

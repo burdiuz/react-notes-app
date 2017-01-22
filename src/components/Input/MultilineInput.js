@@ -23,4 +23,6 @@ const MultilineInput = (props) => {
   );
 };
 
+MultilineInput.propTypes = TextInput.propTypes;
+
 export default MultilineInput;

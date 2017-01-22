@@ -2,7 +2,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
 } from 'react-native';
@@ -13,15 +13,35 @@ import { Input, MultilineInput } from 'src/components/Input';
 // import styles from './styles';
 
 class Add extends Component {
+
+  static propTypes = {
+    subject: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  };
+
   state = {
     subject: '',
     text: '',
-    added: new Date()
   };
 
   componentWillMount() {
-
+    this.setState({
+      subject: this.props.subject || '',
+      text: this.props.text || '',
+    })
   }
+
+  _onSubjectChange = (subject: string) => {
+    this.setState({
+      subject,
+    });
+  };
+
+  _onTextChange = (text: string) => {
+    this.setState({
+      text,
+    });
+  };
 
   _onSaveAndNew = () => {
     this.save();
@@ -38,12 +58,16 @@ class Add extends Component {
     return (
       <Screen>
         <Input
+          value={this.state.subject}
+          onChangeText={this._onSubjectChange}
           placeholder='Note subject'
           style={{
           marginBottom: 10,
           }}
         />
         <MultilineInput
+          value={this.state.text}
+          onChangeText={this._onTextChange}
           placeholder='Note text should be here...'
           style={{
           flex: 1,
@@ -60,3 +84,5 @@ class Add extends Component {
 }
 
 export default Add;
+
+console.log(module.exports);

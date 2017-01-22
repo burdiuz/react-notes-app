@@ -6,6 +6,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import NotesApp from 'src/NotesApp';
+import App from 'src';
 
-AppRegistry.registerComponent('NotesApp', () => NotesApp);
+AppRegistry.registerComponent('NotesApp', () => App);

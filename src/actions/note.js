@@ -1,21 +1,28 @@
-export const CREATE = 'NOTE_CREATE';
-export const UPDATE = 'NOTE_UPDATE';
-export const CANCEL = 'NOTE_EDIT_CANCEL';
+/*
+ * @flow
+ */
+// create new note, user clicked "New" button. affects current note only.
+export const CREATE = 'noteCreate';
+// edit already existing note, user clicked "Edit" button.
+export const EDIT = 'noteEdit';
+export const SAVE = 'noteSave';
 
-export const create = (note) => {
-  return {
+export const create = () => (
+  {
     type: CREATE,
+  }
+);
+
+export const edit = (note) => (
+  {
+    type: EDIT,
     data: note,
-  };
-};
-export const update = (note) => {
-  return {
-    type: UPDATE,
+  }
+);
+
+export const onSave = (note) => (
+  {
+    type: SAVE,
     data: note,
-  };
-};
-export const cancel = () => {
-  return {
-    type: CANCEL,
-  };
-};
+  }
+);
