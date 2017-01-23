@@ -11,7 +11,7 @@ import Button from 'src/components/Button';
 // import styles from './styles';
 
 const ButtonsBlock = ({
-  onSaveAndEdit,
+  onSaveAndList,
   onSaveAndNew,
   disabled,
 }) => (
@@ -20,8 +20,8 @@ const ButtonsBlock = ({
           justifyContent: 'space-around',
         }}>
     <Button
-      label='Save & Edit'
-      onPress={onSaveAndEdit}
+      label='Save'
+      onPress={onSaveAndList}
       disabled={disabled}
       style={{
         flex: 0.5,
@@ -41,7 +41,7 @@ const ButtonsBlock = ({
 );
 
 ButtonsBlock.propTypes = {
-  onSaveAndEdit: PropTypes.func.isRequired,
+  onSaveAndList: PropTypes.func.isRequired,
   onSaveAndNew: PropTypes.func.isRequired,
 };
 

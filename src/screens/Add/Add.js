@@ -15,8 +15,16 @@ import { Input, MultilineInput } from 'src/components/Input';
 class Add extends Component {
 
   static propTypes = {
-    subject: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    note: PropTypes.shape({
+      subject: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      createdOn: PropTypes.any,
+    }),
+    save: PropTypes.func.isRequired,
+  };
+
+  static contextTypes = {
+    navigator: PropTypes.object
   };
 
   state = {
@@ -26,8 +34,7 @@ class Add extends Component {
 
   componentWillMount() {
     this.setState({
-      subject: this.props.subject || '',
-      text: this.props.text || '',
+      ...this.props.note,
     })
   }
 
@@ -46,12 +53,18 @@ class Add extends Component {
   _onSaveAndNew = () => {
     this.save();
   };
-  _onSaveAndEdit = () => {
+  _onSaveAndList = () => {
     this.save();
+    this.context.navigator.popToTop();
   };
 
   save() {
-
+    const { subject, text, createdOn } = this.state;
+    this.props.save({
+      subject,
+      text,
+      createdOn: createdOn || Date.now(),
+    });
   }
 
   render() {
@@ -75,8 +88,8 @@ class Add extends Component {
           paddingBottom: 10,
         }} />
         <ButtonsBlock
-          onSaveAndNew={()=>false}
-          onSaveAndEdit={()=>false}
+          onSaveAndNew={this._onSaveAndNew}
+          onSaveAndList={this._onSaveAndList}
         />
       </Screen>
     );

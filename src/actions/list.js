@@ -10,7 +10,10 @@ export const LOAD_ERROR = 'listLoadError';
 export const SAVE = 'listSave';
 export const SAVE_COMPLETE = 'listSaveComplete';
 export const SAVE_ERROR = 'listSaveError';
+export const ITEM_ADD = 'listItemAdd';
 export const ITEM_SELECTED = 'listItemSelected';
+export const ITEM_REMOVE = 'listItemRemove';
+export const CLEAR = 'listClear';
 
 const generic = (type) => (
   {
@@ -21,17 +24,11 @@ const generic = (type) => (
 export const listLoad = () => {
   return (dispatch) => {
     dispatch(generic(LOAD));
-    console.log('List called!');
     notesStorage.get().then(
       (list) => {
-        console.log('List loaded!');
         dispatch({
           type: LOAD_COMPLETE,
-          list: list || [
-            {subject: 'First note', text: 'some text here'},
-            {subject: 'Second note', text: 'some text here'},
-            {subject: 'Third note', text: 'some text here'},
-          ],
+          list: list || [],
         });
       },
       () => dispatch(generic(LOAD_ERROR))
@@ -49,9 +46,29 @@ export const listSave = (list) => {
   }
 };
 
+export const onItemAdd = (item) => (
+  {
+    type: ITEM_ADD,
+    item,
+  }
+);
+
+export const listClear = () => (
+  {
+    type: CLEAR,
+  }
+);
+
 export const onItemSelected = (item) => (
   {
     type: ITEM_SELECTED,
+    item,
+  }
+);
+
+export const onItemRemove = (item) => (
+  {
+    type: ITEM_REMOVE,
     item,
   }
 );

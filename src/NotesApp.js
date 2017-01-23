@@ -4,48 +4,56 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   Navigator,
+  BackAndroid,
 } from 'react-native';
-
-import List from 'src/screens/List';
-import Add from 'src/screens/Add';
-import Edit from 'src/screens/Edit';
-
-const routes = [
-  {
-    index: 0,
-    key: 'list',
-    screen: List,
-    title: 'Notes list',
-  },
-  {
-    index: 1,
-    key: 'add',
-    screen: Add,
-    title: 'Add new note',
-  },
-  {
-    index: 2,
-    key: 'edit',
-    screen: Edit,
-    title: 'Edit note',
-  }
-];
+import * as routes from 'src/routes';
 
 class NotesApp extends Component {
+  static childContextTypes = {
+    navigator: PropTypes.object
+  };
+
+  getChildContext() {
+    return { navigator: this.refs.navigator };
+  }
+
+  currentRoute = null;
+  state = {};
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._onBack);
+  }
+
+  componentDidMount() {
+    this.setState({
+      mounted: true, //reset context with navigator so I can use it deeply in the DOM
+    });
+  }
+
+  _onBack = () => {
+    if (this.currentRoute !== routes.list) {
+      this.refs.navigator.pop();
+      return true;
+    }
+    return false;
+  };
+
+  _renderScene = (route, navigator) => {
+    this.currentRoute = route;
+    return (
+      <route.screen />
+    );
+  };
+
   render() {
     return (
       <Navigator
-        initialRoute={routes[0]}
-        initialRouteStack={routes}
-        renderScene={(route, navigator) => (
-          <route.screen/>
-        )}>
+        ref='navigator'
+        initialRoute={routes.list}
+        renderScene={this._renderScene}>
       </Navigator>
     );
   }

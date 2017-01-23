@@ -1,14 +1,20 @@
 import { connect } from 'react-redux';
 import { create } from 'src/actions/note';
+import { onItemAdd } from 'src/actions/list';
 import Add from './Add';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    note: state.note,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSave: (note) => dispatch(create(note))
+    save: (note) => {
+      dispatch(onItemAdd(note));
+      dispatch(create());
+    },
   };
 };
 

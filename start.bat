@@ -1,1 +1,1 @@
-npm start --reset-cache
+npm start -- --reset-cache

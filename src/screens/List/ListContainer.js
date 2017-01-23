@@ -1,4 +1,4 @@
-import { listLoad, listSave, onItemSelected } from 'src/actions/list';
+import { listLoad, listSave, listClear, onItemSelected, onItemRemove } from 'src/actions/list';
 import { connect } from 'react-redux';
 import List from './List';
 
@@ -10,7 +10,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   listLoad: () => dispatch(listLoad()),
   listSave: (list) => dispatch(listSave(list)),
+  listClear: (list) => dispatch(listClear()),
   onItemSelected: (item) => dispatch(onItemSelected(item)),
+  onItemRemove: (item) => dispatch(onItemRemove(item)),
 });
 
 export default connect(
