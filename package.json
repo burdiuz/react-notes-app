@@ -1,12 +1,35 @@
 {
-  "name": "ReactNotesApp",
+  "name": "NotesApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
   },
   "dependencies": {
-    "react": "15.2.1",
-    "react-native": "0.31.0"
+    "color": "^1.0.3",
+    "react": "~15.4.0-rc.4",
+    "react-native": "0.40.0",
+    "react-native-linear-gradient": "^2.0.0",
+    "react-native-vector-icons": "^4.0.0",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-jest": "18.0.0",
+    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
+    "babel-plugin-transform-class-constructor-call": "^6.22.0",
+    "babel-plugin-transform-do-expressions": "^6.22.0",
+    "babel-plugin-transform-exponentiation-operator": "^6.22.0",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "18.1.0",
+    "react-test-renderer": "~15.4.0-rc.4"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
