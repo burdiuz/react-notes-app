@@ -5,7 +5,11 @@ import Add from './Add';
 
 const mapStateToProps = (state) => {
   return {
-    note: state.note,
+    note: {
+      subject: '',
+      text: '',
+      createdOn: new Date(),
+    },
   };
 };
 

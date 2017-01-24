@@ -20,12 +20,14 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderBottomColor: '#4285F4',
     paddingHorizontal: 10,
+    minHeight: 20, // for ios, sometimes when flex it might have 0 height and render weird
   },
   multiline: {
     borderWidth: 3,
     borderColor: '#4285F4',
     alignSelf: 'stretch',
     padding: 10,
+    minHeight: 20,
   },
 });
 

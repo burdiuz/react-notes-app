@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   gradient: {
     flexDirection: 'row',
     borderRadius: 7,
-    paddingVertical: 15,
-    paddingHorizontal: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 100,
@@ -20,16 +20,18 @@ const styles = StyleSheet.create({
   linkWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: '#666666',
+  },
+  linkUnderline: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#4285F4',
   },
   link: {
-    color: '#000066',
+    color: '#4285F4',
   },
   text: {
     marginLeft: 10,
     color: '#fff',
-    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 });
 

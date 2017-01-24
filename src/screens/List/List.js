@@ -8,15 +8,15 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import * as routes from 'src/routes';
 
+import NavigationHelper from 'src/components/NavigationHelper';
 import Icon from 'react-native-vector-icons/Entypo';
 import Text, { Heading } from 'src/components/Text';
 import Screen from 'src/components/Screen';
 import Button, { LinkButton } from 'src/components/Button';
 import ListItem from './ListItem';
 
-class List extends Component {
+class List extends NavigationHelper {
 
   static propTypes = {
     list: PropTypes.arrayOf(PropTypes.shape({
@@ -29,26 +29,13 @@ class List extends Component {
     onItemRemove: PropTypes.func.isRequired,
   };
 
-  static contextTypes = {
-    navigator: PropTypes.object
-  };
-
-  get navigator() {
-    return this.context.navigator;
-  }
-
   componentWillMount() {
     this.props.listLoad();
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    // we have navigator here!
-    console.log('NAVIGATOR', Boolean(nextContext.navigator));
-  }
-
   _onItemSelected = (item) => {
     this.props.onItemSelected(item);
-    this.navigator.push(routes.edit);
+    this.goToEdit();
   };
 
   _onItemRemove = (item) => {
@@ -58,15 +45,14 @@ class List extends Component {
   _onClearAll = () => {
     Alert.alert(
       'Clear all',
-      'Do you really want to remove all the notes adn shorten your life a little bit?',
+      'Do you really want to remove all the notes?',
       [
         { text: 'Cancel', onPress: () => console.log('Forget, whatever'), style: 'cancel' },
         { text: 'Proceed', onPress: () => this.props.listClear() },
       ]);
   };
   _onCreateNew = () => {
-    // use router to display "Add" screen
-    this.navigator.push(routes.add);
+    this.goToAdd();
   };
 
   render() {
@@ -80,14 +66,13 @@ class List extends Component {
   renderEmpty() {
     return (
       <Screen>
-        <Heading>Nothing recorded yet</Heading>
         <View style={{
           flex: 1,
           justifyContent: 'center',
         }}>
           <Button
-            label='Add first note'
-            icon={(<Icon name='circle-with-plus' size={30} color='#fff'/>)}
+            label='Add note'
+            icon={(<Icon name='add-to-list' size={30} color='#fff'/>)}
             onPress={this._onCreateNew}
             style={{
             marginHorizontal: 50,
@@ -100,11 +85,6 @@ class List extends Component {
   renderList() {
     return (
       <Screen>
-        <Heading>RECORDED NOTES</Heading>
-        <LinkButton
-          icon={(<Icon name='circle-with-plus' size={30} color='#666666'/>)}
-          label='Add new note'
-          onPress={this._onCreateNew} />
         <ScrollView>
           {
             this.props.list.map((item, index) => (
@@ -117,13 +97,18 @@ class List extends Component {
             ))
           }
         </ScrollView>
-        <Button
-          label='Clear All'
-          icon={(<Icon name='trash' size={30} color='#fff'/>)}
-          onPress={this._onClearAll}
-          style={{
-            marginHorizontal: 50,
-          }} />
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        }}>
+          <LinkButton
+            label='Clear All'
+            icon={(<Icon name='trash' size={20} color='#4285F4'/>)}
+            onPress={this._onClearAll}
+            style={{
+              marginHorizontal: 20,
+            }} />
+        </View>
       </Screen>
     );
   }

@@ -4,8 +4,8 @@
 
 import List from 'src/screens/List';
 
-export default {
-  key: 'list',
+export default () => ({
+  id: 'list',
   screen: List,
   title: 'Notes list',
-};
+});

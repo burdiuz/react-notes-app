@@ -32,17 +32,19 @@ class ListItem extends Component {
           style={[{
           flex:1,
           backgroundColor: '#fff',
-          padding: 20,
+          padding: 10,
         }, style]}
           {...rest}>
           <Text style={{flex: 1}}>{label}</Text>
         </TouchableHighlight>
         <TouchableHighlight
           activeOpacity={0.3}
-          underlayColor='#fcc'
+          underlayColor='#fee'
           style={{
-          backgroundColor: '#00000011', // 11 is opacity, RGBA
-          padding: 20,
+          backgroundColor: '#fff',
+          borderColor: '#eee',
+          borderWidth: 1,
+          padding: 10,
         }}
           onPress={onRemove}>
           <Icon

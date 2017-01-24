@@ -2,17 +2,18 @@
  * @flow
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import {
   View,
 } from 'react-native';
+import NavigationHelper from 'src/components/NavigationHelper';
 import Screen from 'src/components/Screen';
 import ButtonsBlock from './ButtonsBlock';
 import { Input, MultilineInput } from 'src/components/Input';
 
 // import styles from './styles';
 
-class Add extends Component {
+class Add extends NavigationHelper {
 
   static propTypes = {
     note: PropTypes.shape({
@@ -33,6 +34,7 @@ class Add extends Component {
   };
 
   componentWillMount() {
+    console.log(this.props.note);
     this.setState({
       ...this.props.note,
     })
@@ -52,10 +54,11 @@ class Add extends Component {
 
   _onSaveAndNew = () => {
     this.save();
+    this.goToAdd();
   };
   _onSaveAndList = () => {
     this.save();
-    this.context.navigator.popToTop();
+    this.goToList();
   };
 
   save() {
@@ -97,5 +100,3 @@ class Add extends Component {
 }
 
 export default Add;
-
-console.log(module.exports);

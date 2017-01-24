@@ -29,7 +29,7 @@ const ButtonsBlock = ({
         paddingRight: 5,
       }} />
     <Button
-      label='Save & Add New'
+      label='Save & New'
       onPress={onSaveAndNew}
       disabled={disabled}
       style={{

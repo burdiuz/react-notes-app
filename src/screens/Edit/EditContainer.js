@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
-import { update, cancel } from 'src/actions/note';
-import Edit from './Edit';
-
-//FIXME not exported as main component src/screens/Edit
+import { edit } from 'src/actions/note';
+import { onItemAdd } from 'src/actions/list';
+import Add from 'src/screens/Add/Add';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,12 +11,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSave: (note) => dispatch(update(note)),
-    onCancel: () => dispatch(cancel())
+    save: (note) => {
+      dispatch(edit(note));
+    },
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Edit);
+)(Add);

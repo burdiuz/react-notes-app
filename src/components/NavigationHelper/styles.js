@@ -4,14 +4,14 @@
 
 import {
   StyleSheet,
-  Platform,
 } from 'react-native';
-import { NAV_BAR_HEIGHT } from 'src/components/helpers';
 
 const styles = StyleSheet.create({
+  navContainer: {
+    paddingTop: 100,
+  },
   container: {
     flex: 1,
-    marginTop: NAV_BAR_HEIGHT,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#FFF',

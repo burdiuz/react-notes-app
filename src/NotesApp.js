@@ -9,6 +9,7 @@ import {
   Navigator,
   BackAndroid,
 } from 'react-native';
+import NavigationBar from 'src/components/NavigationBar';
 import * as routes from 'src/routes';
 
 class NotesApp extends Component {
@@ -34,11 +35,15 @@ class NotesApp extends Component {
   }
 
   _onBack = () => {
-    if (this.currentRoute !== routes.list) {
-      this.refs.navigator.pop();
+    if (this.currentRoute && this.currentRoute.id !== routes.list().id) {
+      this.refs.navigator.popToTop();
       return true;
     }
     return false;
+  };
+
+  _onAddNewPress = () => {
+    this.refs.navigator.push(routes.add());
   };
 
   _renderScene = (route, navigator) => {
@@ -48,12 +53,22 @@ class NotesApp extends Component {
     );
   };
 
+  renderNavigationBar() {
+    return (
+      <NavigationBar
+        onLeftButtonPress={this._onBack}
+        onRightButtonPress={this._onAddNewPress}
+      />
+    );
+  }
+
   render() {
     return (
       <Navigator
         ref='navigator'
-        initialRoute={routes.list}
-        renderScene={this._renderScene}>
+        initialRoute={routes.list()}
+        renderScene={this._renderScene}
+        navigationBar={this.renderNavigationBar()}>
       </Navigator>
     );
   }
